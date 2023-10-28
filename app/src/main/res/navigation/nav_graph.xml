@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.tpfinaldesaapps.iu.AddFragment"
+        android:name="com.example.tpfinaldesaapps.iu.add.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.tpfinaldesaapps.iu.UpdateFragment"
+        android:name="com.example.tpfinaldesaapps.iu.update.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" >
         <action

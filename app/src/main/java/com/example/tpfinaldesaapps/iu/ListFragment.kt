@@ -5,18 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tpfinaldesaapps.R
-import com.example.tpfinaldesaapps.User
-import com.example.tpfinaldesaapps.UserAdapter
+import com.example.tpfinaldesaapps.model.UserExample
 import com.example.tpfinaldesaapps.databinding.FragmentListBinding
+import com.example.tpfinaldesaapps.viewModel.UserViewModel
 
 
 class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
+
+    private val userViewModel by viewModels<UserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +28,7 @@ class ListFragment : Fragment() {
         binding = FragmentListBinding.inflate(inflater, container, false)
 
 
-        val adapter = UserAdapter(userList = mutableListOf(User(1, "Pepe", "Mujica", 86), User(2, "Leo", "Messi", 36)))
+        val adapter = UserAdapter()
         binding.recyclerViewUser.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewUser.adapter = adapter
 
@@ -39,6 +42,13 @@ class ListFragment : Fragment() {
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
+
+
+        userViewModel.readAllData.observe(viewLifecycleOwner) { userList ->
+            adapter.setList(users = userList)
+        }
+
+
 
         return binding.root
     }

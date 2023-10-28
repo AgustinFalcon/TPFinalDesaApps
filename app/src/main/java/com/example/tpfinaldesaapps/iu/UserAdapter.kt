@@ -1,16 +1,21 @@
-package com.example.tpfinaldesaapps
+package com.example.tpfinaldesaapps.iu
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tpfinaldesaapps.R
+import com.example.tpfinaldesaapps.model.UserExample
 import com.example.tpfinaldesaapps.databinding.ItemRecyclerviewUserBinding
+import com.example.tpfinaldesaapps.model.User
 
 
-class UserAdapter(private val userList: MutableList<User>): RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(): RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
+    private var userList = emptyList<User>()
 
     inner class UserViewHolder(private val binding: ItemRecyclerviewUserBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -22,7 +27,7 @@ class UserAdapter(private val userList: MutableList<User>): RecyclerView.Adapter
                 tvAge.text = user.age.toString()
 
                 root.setOnClickListener {
-                    Log.d("UserAdapter", "el usuario es: $user")
+
                     val bundle = Bundle()
                     bundle.putSerializable("user", user)
                     itemView.findNavController().navigate(R.id.action_listFragment_to_updateFragment, bundle)
@@ -37,12 +42,12 @@ class UserAdapter(private val userList: MutableList<User>): RecyclerView.Adapter
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = ItemRecyclerviewUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return UserViewHolder(binding = binding)
     }
 
-    override fun onBindViewHolder(holder: UserAdapter.UserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = userList.get(position)
         holder.bind(user = user)
         //holder.itemView.findNavController()
@@ -54,6 +59,12 @@ class UserAdapter(private val userList: MutableList<User>): RecyclerView.Adapter
 
     //override fun getItemCount(): Int = userList.size
 
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(users: List<User>) {
+        userList = users
+        notifyDataSetChanged()
+    }
 
 
 }

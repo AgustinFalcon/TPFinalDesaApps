@@ -39,7 +39,7 @@ class AddFragment : Fragment() {
             if (name.isNotEmpty() && lastName.isNotEmpty() && age.isNotEmpty()) {
 
                 // Creo el objeto
-                val user = User(0, name, lastName, age.toInt())
+                val user = User(id = 0, name = name, lastName = lastName, age = age.toInt())
 
                 // Se lo paso al view model
                 userViewModel.insertUser(user = user)

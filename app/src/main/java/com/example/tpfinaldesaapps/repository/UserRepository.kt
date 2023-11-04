@@ -13,13 +13,21 @@ class UserRepository {
     val readAllData: LiveData<List<User>> = userDao.readAllData()
 
 
-    fun insertUser(user: User) {
+    suspend fun insertUser(user: User) {
         userDao.insert(user = user)
     }
 
 
-    fun updateUser(user: User) {
+    suspend fun updateUser(user: User) {
         userDao.update(user = user)
     }
 
+
+    suspend fun deleteUser(user: User) {
+        userDao.deleteUser(user = user)
+    }
+
+    suspend fun deleteAllUsers() {
+        userDao.deleteAll()
+    }
 }

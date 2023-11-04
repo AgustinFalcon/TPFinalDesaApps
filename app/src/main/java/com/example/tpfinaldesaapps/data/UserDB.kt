@@ -20,6 +20,7 @@ abstract class UserDB : RoomDatabase() {
         @Volatile
         private var INSTANCE: UserDB? = null
 
+        // Singleton
         fun getDatabase(): UserDB {
             val tempInstance = INSTANCE
 
